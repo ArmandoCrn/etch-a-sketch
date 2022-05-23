@@ -1,5 +1,7 @@
 :root {
   --white: #ddd;
+  --pure-white: #fff;
+  --black: #2e2e2e;
 }
 
 /*==========
@@ -18,4 +20,115 @@ html {
 
 body {
   margin: 0;
+  background-color: var(--white);
+  user-select: none;
+  /* FIXME: occhio, vedi se causa problemi */
+}
+
+.container {
+  padding-inline: 1rem;
+  padding-block: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/*============
+  TYPOGRAPHY
+============*/
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+h1 {
+  font-size: 2.9rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn {
+  font-size: 1rem;
+}
+
+/*==========
+  SPECIFIC
+==========*/
+
+/* -- HEADER --  */
+
+h1 {
+  margin-block: 0 2rem;
+}
+
+/* -- MAIN --  */
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+#grid {
+  background-color: var(--pure-white);
+  height: 300px;
+  width: 300px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.26);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls .width {
+  width: 150px;
+  cursor: pointer;
+}
+
+#color-picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 95px;
+  height: 95px;
+  border: none;
+  background-color: transparent;
+}
+
+#color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 50px;
+}
+
+#color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 50px;
+}
+
+.btn {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.active {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+/* -- FOOTER --  */
+
+.footer {
+  margin-top: auto;
+  text-align: center;
 }
