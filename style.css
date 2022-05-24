@@ -172,6 +172,7 @@ h1 {
 .footer {
   margin-top: auto;
   text-align: center;
+  user-select: text;
 }
 
 .footer p {
@@ -241,7 +242,7 @@ h1 {
   }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 2000px) {
   #main {
     gap: 9rem;
   }
