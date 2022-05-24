@@ -2,7 +2,7 @@
   --white: #ddd;
   --pure-white: #fff;
   --black: #2e2e2e;
-  --slider-black: #2e2e2e;
+  --chang-value: #2e2e2e;
 }
 
 /*==========
@@ -40,6 +40,7 @@ body {
 
 body {
   font-family: Roboto, sans-serif;
+  color: var(--black);
 }
 
 h1 {
@@ -57,6 +58,7 @@ h1 {
 
 .btn {
   font-size: 1rem;
+  color: inherit;
 }
 
 #size-value {
@@ -132,15 +134,20 @@ h1 {
 
 .btn {
   padding: 0.5rem 1rem;
-  border: 1px solid black;
+  border: 1px solid var(--black);
   border-radius: 6px;
+}
+
+.active {
+  color: var(--white);
+  background-color: var(--chang-value);
 }
 
 #size-grid {
   -webkit-appearance: none;
   -moz-appearance: none;
   border-radius: 20px;
-  border: 1px solid var(--slider-black);
+  border: 1px solid var(--black);
   height: 10px;
 }
 
@@ -160,11 +167,6 @@ h1 {
   height: 25px;
   border-radius: 25px;
   background: var(--black);
-}
-
-.active {
-  color: var(--white);
-  background-color: var(--black);
 }
 
 /* -- FOOTER --  */
