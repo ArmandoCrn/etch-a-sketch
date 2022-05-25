@@ -14,10 +14,10 @@ const grid = document.querySelector("#grid");
 
 colorChoose.addEventListener("input", change_colorValue);
 
-btnColorMode.addEventListener("click", add_removeClass);
-btnRainbowMode.addEventListener("click", add_removeClass);
-btnDelete.addEventListener("click", add_removeClass);
-btnClear.addEventListener("click", add_removeClass);
+btnColorMode.addEventListener("click", setMode);
+btnRainbowMode.addEventListener("click", setMode);
+btnDelete.addEventListener("click", setMode);
+btnClear.addEventListener("click", setMode);
 
 sizeGrid.addEventListener("input", change_sizeValue);
 sizeGrid.addEventListener("change", createGrid);
@@ -28,21 +28,20 @@ let currentMode = "color";
 let colorValue = "#2e2e2e";
 
 // Passa il valore del color picker
-function change_colorValue() {
-  colorValue = this.value;
+function change_colorValue(e) {
+  colorValue = e.target.value;
 
   let root = document.querySelector(":root");
   root.style.setProperty("--change-value", `${colorValue}`);
-  return colorValue;
 }
 
 // Fa succedere cose ai btn
-function add_removeClass(e) {
+function setMode(e) {
   if (e.target.id === "color-mode") {
     btnRainbowMode.classList.remove("active-rainbow");
     btnDelete.classList.remove("active-delete");
 
-    this.classList.add("active-color");
+    e.target.classList.add("active-color");
     return (currentMode = "color");
   }
 
@@ -50,7 +49,7 @@ function add_removeClass(e) {
     btnColorMode.classList.remove("active-color");
     btnDelete.classList.remove("active-delete");
 
-    this.classList.add("active-rainbow");
+    e.target.classList.add("active-rainbow");
 
     return (currentMode = "rainbow");
   }
@@ -59,7 +58,7 @@ function add_removeClass(e) {
     btnColorMode.classList.remove("active-color");
     btnRainbowMode.classList.remove("active-rainbow");
 
-    this.classList.add("active-delete");
+    e.target.classList.add("active-delete");
 
     return (currentMode = "delete");
   }
@@ -70,30 +69,30 @@ function add_removeClass(e) {
 }
 
 // Prendiamo il valore del sizeGrid e lo facciamo comparire a schermo
-function change_sizeValue() {
-  sizeValue.innerText = `${this.value} x ${this.value}`;
+function change_sizeValue(e) {
+  sizeValue.innerText = `${e.target.value} x ${e.target.value}`;
+  // Poteva anche essere sostituito da:
+  //`${this.value} x ${this.value}`;
 }
 
 // Creazione della griglia
 function createGrid() {
   let maxValue = sizeGrid.value ** 2;
 
-  // Rimuovi ogni volta tutti i child
-  while (grid.firstChild) {
-    grid.removeChild(grid.firstChild);
-  }
+  // Setta lo stile per renderlo una grid
+  grid.style.gridTemplateColumns = `repeat(${sizeGrid.value}, 1fr)`;
+  grid.style.gridTemplateRows = `repeat(${sizeGrid.value}, 1fr)`;
+
+  // Rimuovi ogni volta tutto
+  grid.innerHTML = "";
 
   // Aggiungi div rispetto al value ** 2 di sizeGrid
-  for (let i = 1; i <= maxValue; i++) {
+  for (let i = 0; i < maxValue; i++) {
     let div = document.createElement("div");
-    div.addEventListener("mouseover", colorDiv);
-    div.addEventListener("mousedown", colorDiv);
+    div.addEventListener("mouseover", changeColor);
+    div.addEventListener("mousedown", changeColor);
     grid.appendChild(div);
   }
-
-  // Setta lo stile per renderlo una grid
-  grid.style = `grid-template-columns: repeat(${sizeGrid.value}, 1fr);
-  grid-template-rows: repeat(${sizeGrid.value}, 1fr);`;
 }
 
 // Questo servirà per fare sia click che mousehover
@@ -102,25 +101,19 @@ document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
 // Cosa succede al click dei div
-function colorDiv(e) {
+function changeColor(e) {
   if (e.type === "mouseover" && !mouseDown) return;
 
   if (currentMode === "color") {
-    this.style = `background-color: ${colorValue};`;
-  }
-
-  if (currentMode === "rainbow") {
+    e.target.style = `background-color: ${colorValue};`;
+  } else if (currentMode === "rainbow") {
     let randomR = Math.floor(Math.random() * 256);
     let randomG = Math.floor(Math.random() * 256);
     let randomB = Math.floor(Math.random() * 256);
 
-    let colorValueRainbow = `rgb(${randomR}, ${randomG}, ${randomB})`;
-
-    this.style = `background-color: ${colorValueRainbow};`;
-  }
-
-  if (currentMode === "delete") {
-    this.style = `background-color: #fff;`;
+    e.target.style = `background-color: rgb(${randomR}, ${randomG}, ${randomB});`;
+  } else if (currentMode === "delete") {
+    e.target.style = `background-color: #fff;`;
   }
 }
 
