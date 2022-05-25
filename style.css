@@ -93,6 +93,7 @@ h1 {
 }
 
 #grid {
+  display: grid;
   background-color: var(--pure-white);
   height: 300px;
   width: 300px;
@@ -143,9 +144,27 @@ h1 {
   transform: scale(1.1);
 }
 
-.active {
+.active-color,
+.active-rainbow,
+.active-delete {
   color: var(--white);
+}
+
+.active-color {
   background-color: var(--change-value);
+}
+
+.active-rainbow {
+  background: linear-gradient(45deg, #e2592f, #dd1964, #0faee7, #16d861);
+}
+
+.active-delete {
+  background-color: var(--black);
+}
+
+#clear:active {
+  color: var(--white);
+  background-color: var(--black);
 }
 
 #size-grid {
@@ -210,7 +229,6 @@ h1 {
   }
 
   #grid {
-    display: grid;
     height: 400px;
     width: 400px;
   }
