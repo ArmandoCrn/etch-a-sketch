@@ -2,7 +2,7 @@
   --white: #ddd;
   --pure-white: #fff;
   --black: #2e2e2e;
-  --chang-value: #2e2e2e;
+  --change-value: #2e2e2e;
 }
 
 /*==========
@@ -136,11 +136,16 @@ h1 {
   padding: 0.5rem 1rem;
   border: 1px solid var(--black);
   border-radius: 6px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .active {
   color: var(--white);
-  background-color: var(--chang-value);
+  background-color: var(--change-value);
 }
 
 #size-grid {
@@ -244,17 +249,27 @@ h1 {
   }
 }
 
+@media (min-width: 1200px) {
+  #main {
+    gap: 7.5rem;
+  }
+
+  .controls {
+    width: 200px;
+  }
+}
+
 @media (min-width: 2000px) {
   #main {
     gap: 9rem;
   }
 
   #grid {
-    height: 600px;
-    width: 600px;
+    height: 700px;
+    width: 700px;
   }
 
   .controls {
-    width: 210px;
+    width: 250px;
   }
 }
